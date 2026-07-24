@@ -1,0 +1,194 @@
+/* ==========================================
+   Jett Tarwater Portfolio
+   script.js
+========================================== */
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* ============================
+       Lightbox
+    ============================ */
+
+    const galleryImages = document.querySelectorAll(".gallery img");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightbox-img");
+    const closeBtn = document.getElementById("close");
+
+    galleryImages.forEach(image => {
+
+        image.addEventListener("click", () => {
+
+            lightbox.style.display = "flex";
+            lightboxImg.src = image.src;
+            lightboxImg.alt = image.alt;
+
+        });
+
+    });
+
+    closeBtn.addEventListener("click", () => {
+
+        lightbox.style.display = "none";
+
+    });
+
+    lightbox.addEventListener("click", (e) => {
+
+        if (e.target === lightbox) {
+
+            lightbox.style.display = "none";
+
+        }
+
+    });
+
+    document.addEventListener("keydown", (e) => {
+
+        if (e.key === "Escape") {
+
+            lightbox.style.display = "none";
+
+        }
+
+    });
+
+
+    /* ============================
+       Fade-in Animation
+    ============================ */
+
+    const sections = document.querySelectorAll("section");
+
+    sections.forEach(section => {
+
+        section.classList.add("fade");
+
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+
+        entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+                entry.target.classList.add("show");
+
+            }
+
+        });
+
+    }, {
+
+        threshold: 0.15
+
+    });
+
+    sections.forEach(section => {
+
+        observer.observe(section);
+
+    });
+
+
+    /* ============================
+       Navigation Highlight
+    ============================ */
+
+    const navLinks = document.querySelectorAll("nav a");
+
+    window.addEventListener("scroll", () => {
+
+        let current = "";
+
+        sections.forEach(section => {
+
+            const sectionTop = section.offsetTop - 120;
+
+            if (pageYOffset >= sectionTop) {
+
+                current = section.getAttribute("id");
+
+            }
+
+        });
+
+        navLinks.forEach(link => {
+
+            link.classList.remove("active");
+
+            if (link.getAttribute("href") === "#" + current) {
+
+                link.classList.add("active");
+
+            }
+
+        });
+
+    });
+
+
+    /* ============================
+       Hero Fade
+    ============================ */
+
+    const heroText = document.querySelector(".hero-text");
+
+    if (heroText) {
+
+        heroText.style.opacity = "0";
+        heroText.style.transform = "translateY(30px)";
+        heroText.style.transition = "1.2s";
+
+        setTimeout(() => {
+
+            heroText.style.opacity = "1";
+            heroText.style.transform = "translateY(0px)";
+
+        }, 250);
+
+    }
+
+
+    /* ============================
+       Image Hover Tilt
+    ============================ */
+
+    galleryImages.forEach(image => {
+
+        image.addEventListener("mousemove", (e) => {
+
+            const rect = image.getBoundingClientRect();
+
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const rotateX = ((y / rect.height) - 0.5) * 8;
+            const rotateY = ((x / rect.width) - 0.5) * -8;
+
+            image.style.transform =
+                `perspective(600px)
+                 rotateX(${rotateX}deg)
+                 rotateY(${rotateY}deg)
+                 scale(1.03)`;
+
+        });
+
+        image.addEventListener("mouseleave", () => {
+
+            image.style.transform = "";
+
+        });
+
+    });
+
+
+    /* ============================
+       Console Greeting
+    ============================ */
+
+    console.log("%cJett Tarwater Portfolio",
+        "font-size:20px;font-weight:bold;color:black;");
+
+    console.log("Website loaded successfully.");
+
+});

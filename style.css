@@ -1,4 +1,3 @@
-Here is Part 2. Save it as style.css in the same folder as your index.html.
 
 /* ===========================
    Jett Tarwater Portfolio
@@ -106,6 +105,12 @@ section h2{
 section p{
     max-width:900px;
     font-size:1.05rem;
+}
+
+.hidden-link {
+    color: inherit;            /* Matches the color of the surrounding body text */
+    text-decoration: none;     /* Removes the default underline */
+    cursor: default;           /* Prevents the cursor from changing to a hand pointer */
 }
 
 /* ===========================

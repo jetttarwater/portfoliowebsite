@@ -108,6 +108,8 @@ section p{
 }
 
 .hidden-link {
+    max-width:900px;
+    font-size:1.05rem;
     color: inherit;            /* Matches the color of the surrounding body text */
     text-decoration: none;     /* Removes the default underline */
     cursor: default;           /* Prevents the cursor from changing to a hand pointer */
